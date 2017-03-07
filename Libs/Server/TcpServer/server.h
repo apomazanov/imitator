@@ -6,6 +6,9 @@
 #include <QTimer>
 #include <QDateTime>
 #include <iostream>
+#include <QDebug>
+
+#include "tcpclient.h"
 
 using namespace std;
 
@@ -20,15 +23,15 @@ public:
 private:
     QTcpServer *tcpServer;
     QTimer *timRepeater;
-    QMap<int, QTcpSocket*> mapUsers;
+    QMap<int, TcpClient*> mapUsers;
 
-    void sendToClient(QTcpSocket *tcpClient, QByteArray data);
+    void sendToClient(TcpClient *tcpClient, QByteArray data);
+//    void incomingConnection(int socketID);
 
 private slots:
-    void slotReadFromClient();
     void slotNewConnection();
     void slotTimerRepeaterTimeout();
-    void slotDisconnected();
+//    void slotDisconnected();
 };
 
 #endif // SERVER_H
