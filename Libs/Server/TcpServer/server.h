@@ -4,7 +4,7 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QTimer>
-#include <QList>
+#include <QDateTime>
 #include <iostream>
 
 using namespace std;
@@ -20,8 +20,7 @@ public:
 private:
     QTcpServer *tcpServer;
     QTimer *timRepeater;
-    QList<QTcpSocket> mapUsers;
-    int num = 0;
+    QMap<int, QTcpSocket*> mapUsers;
 
     void sendToClient(QTcpSocket *tcpClient, QByteArray data);
 

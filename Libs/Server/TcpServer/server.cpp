@@ -7,6 +7,8 @@ Server::Server(QObject *parent, int port) : QObject(parent)
 
     connect(tcpServer, SIGNAL(newConnection()),
             this, SLOT(slotNewConnection()));
+    connect(timRepeater, SIGNAL(timeout()),
+            this,        SLOT(slotTimerRepeaterTimeout()));
 
 
     if (!tcpServer->listen(QHostAddress::Any, port))
@@ -16,6 +18,8 @@ Server::Server(QObject *parent, int port) : QObject(parent)
         tcpServer->close();
         return;
     }
+
+    timRepeater->start(2000);
 }
 
 void Server::sendToClient(QTcpSocket* tcpClient, QByteArray data)
@@ -34,40 +38,53 @@ void Server::slotReadFromClient()
 void Server::slotNewConnection()
 {
     QTcpSocket *tcpClient = tcpServer->nextPendingConnection();
-    connect(tcpClient, SIGNAL(disconnected()),
-            tcpClient, SLOT(deleteLater()));
-    connect(tcpClient, SIGNAL(readyRead()),
-            this,      SLOT(slotReadFromClient()));
-    connect(tcpClient, SIGNAL(disconnected()),
-            this     , SLOT(slotDisconnected()));
+//    QString mess = QString("New User: %1:%2")
+//            .arg(tcpClient->localAddress().toString())
+//            .arg(tcpClient->localPort());
+//    cout << mess.toStdString() << endl;
 
-    QString mess = QString("New User: %1:%2")
-            .arg(tcpClient->localAddress().toString())
-            .arg(tcpClient->localPort());
-    cout << mess.toStdString() << endl;
+    int socketID = tcpClient->socketDescriptor();
+    cout << "Socket = " << QString::number(socketID).toStdString() << endl;
+    mapUsers[socketID] = tcpClient;
 
-    QTcpSocket temp = *tcpClient;
-    mapUsers.append(temp);
+//    connect(mapUsers[socketID], SIGNAL(disconnected()),
+//            mapUsers[socketID], SLOT(deleteLater()));
+    connect(mapUsers[socketID], SIGNAL(readyRead()),
+            this,               SLOT(slotReadFromClient()));
+    connect(mapUsers[socketID], SIGNAL(disconnected()),
+            this,               SLOT(slotDisconnected()));
 
     QByteArray data = QByteArray::fromStdString(QString("Hello!").toStdString());
     sendToClient(tcpClient, data);
-
-    timRepeater->start(2000);
 }
 
 void Server::slotTimerRepeaterTimeout()
 {
-    num++;
-    QByteArray data = QByteArray::number(num);
+    QString m = QDateTime::currentDateTime().toString();
+//    cout << m.toStdString() << endl;
+    QByteArray data = QByteArray::fromStdString(m.toStdString());
+    foreach (int i, mapUsers.keys()) {
+        sendToClient(mapUsers.value(i), data);
+    }
 
 }
 
 void Server::slotDisconnected()
 {
     QTcpSocket *tcpClient = (QTcpSocket*)sender();
+    int temp = tcpClient->socketDescriptor();
+    cout << "temp = " << temp << endl;
 
-    QString mess = QString("User %1:%2 disconnected")
-            .arg(tcpClient->localAddress().toString())
-            .arg(tcpClient->localPort());
-    cout << mess.toStdString() << endl;
+    foreach (int i, mapUsers.keys()) {
+        cout << "i = " << i << endl;
+        if (i == temp)
+        {
+            mapUsers.value(i)->close();
+            QString m = QString("User %1 disconnected").arg(i);
+            cout << m.toStdString() << endl;
+            break;
+        }
+    }
+
+    mapUsers.remove(temp);
 }
