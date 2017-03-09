@@ -73,10 +73,10 @@ void Server::slotDisconnected()
 {
     QTcpSocket *tcpClient = (QTcpSocket*)sender();
     int temp = tcpClient->socketDescriptor();
-    cout << "temp = " << temp << endl;
+//    cout << "temp = " << temp << endl;
 
     foreach (int i, mapUsers.keys()) {
-        cout << "i = " << i << endl;
+//        cout << "i = " << i << endl;
         if (i == temp)
         {
             mapUsers.value(i)->close();
