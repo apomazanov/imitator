@@ -26,8 +26,6 @@ public:
     QMap<QString, double> paramSimpleDouble;
     // Для "списков списков" пар параметр:значение
     QMap<QString, QList<QMap<QString, double>>> paramSimpleArray;
-    // Для TARGETS
-    QMap<QString, QList<QMap<QString, double>>> paramTargetsArray;
     // Для TABLE_SIGNAL
     QMap<QString, QList<double>> paramTableSignalArray;
 

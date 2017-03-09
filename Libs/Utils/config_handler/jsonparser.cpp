@@ -24,25 +24,51 @@ JsonParser::JsonParser(QObject *parent) : QObject(parent)
         {
             str += " = array";
 
-            if (rootKey.compare("TARGETS") && rootKey.compare("TABLE_SIGNAL"))
+            if (rootKey.compare("TABLE_SIGNAL"))
             {
                 // List of QMaps
-                QJsonArray jsonArray1 = root.value(rootKey).toArray();
+                QJsonArray jsonArray = root.value(rootKey).toArray();
                 QList<QMap<QString, double>> listOfMaps;
 
-                for (int j = 0; j < jsonArray1.count(); j++)
+                for (int j = 0; j < jsonArray.count(); j++)
                 {
                     // QMaps
-                    QJsonObject jObj = jsonArray1[j].toObject();
+                    QJsonObject jObj = jsonArray[j].toObject();
                     QMap<QString, double> simpleMap;
                     for (int k = 0; k < jObj.keys().count(); k++)
                     {
                         QString tempKey = jObj.keys().at(k);
-                        simpleMap[tempKey] = jObj.value(tempKey).toDouble();
+
+
+                        // TARGETS or not
+                        if (jObj[tempKey].isObject())
+                        {
+                            QJsonObject tObj = jObj[tempKey].toObject();
+                            for (int z = 0; z < tObj.keys().count(); z++)
+                            {
+                                QString oldName = tObj.keys().at(z);
+                                QString newName = tempKey + "_" + oldName;
+                                simpleMap[newName] = tObj.value(oldName).toDouble();
+                            }
+                        }
+                        else
+                            simpleMap[tempKey] = jObj.value(tempKey).toDouble();
                     }
                     listOfMaps.append(simpleMap);
                 }
                 paramSimpleArray[rootKey] = listOfMaps;
+            }
+            else
+            {
+                // TABLE_SIGNAL
+                // List of doubles
+                QJsonArray jsonArray = root.value(rootKey).toArray();
+                QList<double> listOfDoubles;
+
+                for (int j = 0; j < jsonArray.count(); j++)
+                    listOfDoubles.append(jsonArray[j].toDouble());
+
+                paramTableSignalArray[rootKey] = listOfDoubles;
             }
         }
         if (root.value(rootKey).isDouble())
