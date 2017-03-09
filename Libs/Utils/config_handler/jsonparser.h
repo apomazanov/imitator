@@ -11,28 +11,28 @@
 #include <QList>
 using namespace std;
 
+#ifndef DEFAULTPATH
+#define DEFAULTPATH  "./../../../config.json"
+#endif // DEFAULTPATH
+
 class JsonParser : public QObject
 {
     Q_OBJECT
 public:
-    explicit JsonParser(QObject *parent = 0);
+    explicit JsonParser(QObject *parent = 0, QString configFilePath = DEFAULTPATH);
 
     /**************************************************************************
      * QMaps для параметров из JSON
      **************************************************************************/
-    // Для строковых параметров
-    QMap<QString, QString> paramSimpleString;
-    // Для простых параметров double
-    QMap<QString, double> paramSimpleDouble;
-    // Для "списков списков" пар параметр:значение
-    QMap<QString, QList<QMap<QString, double>>> paramSimpleArray;
+    // Для простых параметров
+    QMap<QString, QString> paramsSimple;
+    // Для составных параметров
+    QMap<QString, QList<QMap<QString, QString>>> paramsComplex;
     // Для TABLE_SIGNAL
-    QMap<QString, QList<double>> paramTableSignalArray;
+    QMap<QString, QList<QString>> paramTableSignal;
 
 private:
     QFile jsonConfig;
-    QString configPath = QString("./../../../config.json");
-
 };
 
 #endif // JSONPARSER_H

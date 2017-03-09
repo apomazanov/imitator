@@ -1,10 +1,13 @@
 #include <QCoreApplication>
-#include "jsonparser.h"
+#include "paramsraw.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    JsonParser parser;
+    ParamsRaw p(0, "./../../../config.json");
+
+    QString res = p.getParam("TARGETS", 1, "rsc_sigma");
+    cout << res.toStdString() << endl;
 
     return a.exec();
 }
