@@ -71,20 +71,27 @@ void Server::slotTimerRepeaterTimeout()
 
 void Server::slotDisconnected()
 {
-    QTcpSocket *tcpClient = (QTcpSocket*)sender();
-    int temp = tcpClient->socketDescriptor();
-//    cout << "temp = " << temp << endl;
-
-    foreach (int i, mapUsers.keys()) {
-//        cout << "i = " << i << endl;
-        if (i == temp)
-        {
-            mapUsers.value(i)->close();
-            QString m = QString("User %1 disconnected").arg(i);
-            cout << m.toStdString() << endl;
-            break;
-        }
+    QObject *obj = sender();
+    if (obj->inherits("QTcpSocket"))
+    {
+        QTcpSocket *sobj = (QTcpSocket*)obj;
+        int t = sobj->socketDescriptor();
+        cout << "disc " << t << endl;
     }
+//    QTcpSocket *tcpClient = (QTcpSocket*)sender();
+//    int temp = tcpClient->socketDescriptor();
+////    cout << "temp = " << temp << endl;
 
-    mapUsers.remove(temp);
+//    foreach (int i, mapUsers.keys()) {
+////        cout << "i = " << i << endl;
+//        if (i == temp)
+//        {
+//            mapUsers.value(i)->close();
+//            QString m = QString("User %1 disconnected").arg(i);
+//            cout << m.toStdString() << endl;
+//            break;
+//        }
+//    }
+
+//    mapUsers.remove(temp);
 }

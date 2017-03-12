@@ -14,6 +14,7 @@ public:
     QList<QString> getParam(QString paramName, QString confirm);
     // Для составных параметров
     QString getParam(QString kitName, int pos, QString paramName);
+    int getArraySize(QString kitName);
     // Для простых параметров
     QString getParam(QString paramName);
 

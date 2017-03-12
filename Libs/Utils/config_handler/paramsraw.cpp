@@ -41,6 +41,15 @@ QString ParamsRaw::getParam(QString kitName, int pos, QString paramName)
     return "-1";
 }
 
+int ParamsRaw::getArraySize(QString kitName)
+{
+    foreach (QString rootKey, parser->paramsComplex.keys()) {
+        if (!rootKey.compare(kitName))
+            return parser->paramsComplex.value(kitName).count();
+    }
+    return -1;
+}
+
 QString ParamsRaw::getParam(QString paramName)
 {
     foreach (QString key, parser->paramsSimple.keys()) {
