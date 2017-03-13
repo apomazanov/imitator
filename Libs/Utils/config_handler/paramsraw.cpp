@@ -50,6 +50,21 @@ int ParamsRaw::getArraySize(QString kitName)
     return -1;
 }
 
+QMap<QString, QString> ParamsRaw::getItemFromArray(QString kitName, int pos)
+{
+    QMap<QString, QString> empty;
+    empty["-1"] = "-1";
+    foreach (QString rootkey, parser->paramsComplex.keys()) {
+        if (!rootkey.compare(kitName)){
+            if (parser->paramsComplex.value(kitName).count() < (pos + 1))
+                return empty;
+            else
+                return parser->paramsComplex.value(kitName)[pos];
+        }
+    }
+    return empty;
+}
+
 QString ParamsRaw::getParam(QString paramName)
 {
     foreach (QString key, parser->paramsSimple.keys()) {

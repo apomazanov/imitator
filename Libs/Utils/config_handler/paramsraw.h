@@ -15,6 +15,7 @@ public:
     // Для составных параметров
     QString getParam(QString kitName, int pos, QString paramName);
     int getArraySize(QString kitName);
+    QMap<QString, QString> getItemFromArray(QString kitName, int pos);
     // Для простых параметров
     QString getParam(QString paramName);
 

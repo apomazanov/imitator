@@ -106,9 +106,9 @@ void Locator::createSimpleDNA()
         z_values[i] = qSin(mul_z * qSin(z_angles[i])) / (mul_z * qSin(z_angles[i]));
 }
 
-void Locator::spin()
+void Locator::spin(double world_time_delta)
 {
-
+    locator_angle = (locator_angle + (speed * world_time_delta)) % 6.28;
 }
 
 double Locator::findMinInList(QList<double> list)

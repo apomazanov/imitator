@@ -36,7 +36,7 @@ private:
 
     void createTableDNA();
     void createSimpleDNA();
-    void spin();
+    void spin(double world_time_delta);
 
     double findMinInList(QList<double> list);
 
