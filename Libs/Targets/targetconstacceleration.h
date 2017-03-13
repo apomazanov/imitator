@@ -6,7 +6,7 @@
 class TargetConstAcceleration : public BaseTarget
 {
 public:
-    explicit TargetConstAcceleration(QMap<QString, QString> *targetConfig = 0);
+    explicit TargetConstAcceleration(QMap<QString, QString> *targetConfig);
 
     double acceleration_sigma;
     double acceleration_mu;

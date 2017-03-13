@@ -19,4 +19,5 @@ HEADERS += \
     basetarget.h \
     targetconstacceleration.h \
     targetconstspeed.h \
-    ../Utils/distributions/distributions.h
+    ../Utils/distributions/distributions.h \
+    targets.h

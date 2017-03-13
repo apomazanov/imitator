@@ -11,7 +11,7 @@ class TcpClient : public QTcpSocket
     Q_OBJECT
 
 public:
-    TcpClient(QObject *parent);
+    TcpClient();
 
 private slots:
     void slotReadData();

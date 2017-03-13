@@ -1,6 +1,6 @@
 #include "tcpclient.h"
 
-TcpClient::TcpClient(QObject* parent)
+TcpClient::TcpClient() : QTcpSocket()
 {
     connect(this, SIGNAL(disconnected()),
             this, SLOT(deleteLater()));

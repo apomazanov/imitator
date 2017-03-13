@@ -12,14 +12,14 @@
 using namespace std;
 
 #ifndef DEFAULTPATH
-#define DEFAULTPATH  "./../../../config.json"
+#define DEFAULTPATH  "../../../config.json"
 #endif // DEFAULTPATH
 
 class JsonParser : public QObject
 {
     Q_OBJECT
 public:
-    explicit JsonParser(QObject *parent = 0, QString configFilePath = DEFAULTPATH);
+    explicit JsonParser(QString configFilePath = DEFAULTPATH);
 
     /**************************************************************************
      * QMaps для параметров из JSON

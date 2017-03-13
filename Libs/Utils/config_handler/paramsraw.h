@@ -8,7 +8,7 @@ class ParamsRaw : public QObject
 {
     Q_OBJECT
 public:
-    explicit ParamsRaw(QObject *parent = 0, QString configFilePath = DEFAULTPATH);
+    explicit ParamsRaw(QString configFilePath = DEFAULTPATH);
 
     // Для TABLE_SIGNAL
     QList<QString> getParam(QString paramName, QString confirm);
@@ -18,6 +18,8 @@ public:
     QMap<QString, QString> getItemFromArray(QString kitName, int pos);
     // Для простых параметров
     QString getParam(QString paramName);
+
+    bool ifContainsSimple(QString name);
 
 private:
     JsonParser *parser;

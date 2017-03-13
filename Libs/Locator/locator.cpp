@@ -1,8 +1,9 @@
 #include "locator.h"
 
-Locator::Locator(QObject *parent) : QObject(parent)
+Locator::Locator(ParamsRaw *params) : QObject()
 {
-    config = new ParamsRaw(0, "../../config.json");
+//    config = new ParamsRaw(0, "../../config.json");
+    config = params;
 
     // Переводим в радианы
     speed = qDegreesToRadians(config->getParam("ROTATION_SPEED").toDouble());
@@ -108,7 +109,10 @@ void Locator::createSimpleDNA()
 
 void Locator::spin(double world_time_delta)
 {
-    locator_angle = (locator_angle + (speed * world_time_delta)) % 6.28;
+//    locator_angle = (locator_angle + (speed * world_time_delta)) % 6.28;
+    locator_angle = (locator_angle + (speed * world_time_delta));
+    while (locator_angle >= 2*M_PI)
+        locator_angle -= 2*M_PI;
 }
 
 double Locator::findMinInList(QList<double> list)

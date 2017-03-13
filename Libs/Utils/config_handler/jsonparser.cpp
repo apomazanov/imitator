@@ -1,6 +1,6 @@
 #include "jsonparser.h"
 
-JsonParser::JsonParser(QObject *parent, QString configFilePath) : QObject(parent)
+JsonParser::JsonParser(QString configFilePath) : QObject()
 {
     jsonConfig.setFileName(configFilePath);
     if (!jsonConfig.open(QFile::ReadOnly))
@@ -77,7 +77,5 @@ JsonParser::JsonParser(QObject *parent, QString configFilePath) : QObject(parent
                 paramTableSignal[rootKey] = listOfStrings;
             }
         }
-//        cout << str.toStdString() << endl;
     }
-    cout << "\n";
 }

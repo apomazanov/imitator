@@ -15,7 +15,7 @@ class BaseTarget : public QObject
 {
     Q_OBJECT
 public:
-    explicit BaseTarget(QMap<QString, QString> *targetConfig = 0);
+    explicit BaseTarget(QMap<QString, QString> *targetConfig);
 
     QMap<QString, double> cart_coord;
     QMap<QString, double> speed_for_coord;
@@ -27,7 +27,7 @@ public:
     double get_gain;
     double rsc_sigma;
 
-private:
+//private:
     QMap<QString, double> translate_to_sph(QMap<QString, double> dec);
     double getOnRangeGain(double on_range, double on_range_gain);
     double getStaticGain();

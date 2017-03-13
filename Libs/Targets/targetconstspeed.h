@@ -6,7 +6,7 @@
 class TargetConstSpeed : public BaseTarget
 {
 public:
-    explicit TargetConstSpeed(QMap<QString, QString> *targetConfig = 0);
+    explicit TargetConstSpeed(QMap<QString, QString> *targetConfig);
 
     double speed_sigma;
     double speed_mu;

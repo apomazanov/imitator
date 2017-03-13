@@ -1,8 +1,8 @@
 #include "paramsraw.h"
 
-ParamsRaw::ParamsRaw(QObject *parent, QString configFilePath) : QObject(parent)
+ParamsRaw::ParamsRaw(QString configFilePath) : QObject()
 {
-    parser = new JsonParser(0, configFilePath);
+    parser = new JsonParser(configFilePath);
 }
 
 QList<QString> ParamsRaw::getParam(QString paramName, QString confirm)
@@ -73,4 +73,12 @@ QString ParamsRaw::getParam(QString paramName)
     }
 
     return "-1";
+}
+
+bool ParamsRaw::ifContainsSimple(QString name)
+{
+    if (parser->paramsSimple.keys().contains(name))
+        return true;
+    else
+        return false;
 }

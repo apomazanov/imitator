@@ -2,34 +2,35 @@
 
 BaseTarget::BaseTarget(QMap<QString, QString> *targetConfig)
 {
-    cout << "base" << endl;
-//    cart_coord["x"] = targetConfig->value("x0").toDouble();
-//    cart_coord["y"] = targetConfig->value("y0").toDouble();
-//    cart_coord["z"] = targetConfig->value("z0").toDouble();
+//    cout << "base" << endl;
 
-//    speed_for_coord["Vx"] = targetConfig->value("Vx").toDouble();
-//    speed_for_coord["Vy"] = targetConfig->value("Vy").toDouble();
-//    speed_for_coord["Vz"] = targetConfig->value("Vz").toDouble();
+    cart_coord["x"] = targetConfig->value("x0").toDouble();
+    cart_coord["y"] = targetConfig->value("y0").toDouble();
+    cart_coord["z"] = targetConfig->value("z0").toDouble();
 
-//    sph_coord = translate_to_sph(cart_coord);
+    speed_for_coord["Vx"] = targetConfig->value("Vx").toDouble();
+    speed_for_coord["Vy"] = targetConfig->value("Vy").toDouble();
+    speed_for_coord["Vz"] = targetConfig->value("Vz").toDouble();
 
-////    time_delta = targetConfig->value("world_time_delta").toDouble();
+    sph_coord = translate_to_sph(cart_coord);
+
+//    time_delta = targetConfig->value("world_time_delta").toDouble();
 //    time_delta = 456;
-//    time_delta_sq = qPow(time_delta, 2);
+    time_delta_sq = qPow(time_delta, 2);
 
-//    if (targetConfig->keys().contains("gain_range") && targetConfig->keys().contains("gain_value"))
-//    {
-//        double on_range = targetConfig->value("gain_range").toDouble();
-//        double on_range_gain = targetConfig->value("gain_value").toDouble();
-//        get_gain = getOnRangeGain(on_range, on_range_gain);
-//    }
-//    else
-//        get_gain = getStaticGain();
+    if (targetConfig->keys().contains("gain_range") && targetConfig->keys().contains("gain_value"))
+    {
+        double on_range = targetConfig->value("gain_range").toDouble();
+        double on_range_gain = targetConfig->value("gain_value").toDouble();
+        get_gain = getOnRangeGain(on_range, on_range_gain);
+    }
+    else
+        get_gain = getStaticGain();
 
-//    if (targetConfig->keys().contains("rsc_sigma"))
-//    {
-//        rsc_sigma = targetConfig->value("rsc_sigma").toDouble();
-//    }
+    if (targetConfig->keys().contains("rsc_sigma"))
+    {
+        rsc_sigma = targetConfig->value("rsc_sigma").toDouble();
+    }
 }
 
 QMap<QString, double> BaseTarget::translate_to_sph(QMap<QString, double> dec)

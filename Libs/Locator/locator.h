@@ -15,7 +15,7 @@ class Locator : public QObject
 {
     Q_OBJECT
 public:
-    explicit Locator(QObject *parent = 0);
+    explicit Locator(ParamsRaw *params);
 
 
     double speed;

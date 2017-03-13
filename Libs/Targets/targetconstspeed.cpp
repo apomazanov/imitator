@@ -1,10 +1,10 @@
 #include "targetconstspeed.h"
 
-TargetConstSpeed::TargetConstSpeed(QMap<QString, QString> *targetConfig)
+TargetConstSpeed::TargetConstSpeed(QMap<QString, QString> *targetConfig) : BaseTarget(targetConfig)
 {
-    cout << "speed" << endl;
+//    cout << "speed" << endl;
     speed_sigma = targetConfig->value("speed_sigma").toDouble();
-    speed_mu = targetConfig->value("mu").toDouble();;
+    speed_mu = targetConfig->value("mu").toDouble();
 }
 
 void TargetConstSpeed::update()
