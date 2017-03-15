@@ -2,7 +2,6 @@
 
 ReceiverBase::ReceiverBase(ParamsRaw *receiverConfig)
 {
-    cout << "receiver base" << endl;
     pulse_repeat_time = receiverConfig->getParam("PULSE_REPEAT_TIME").toDouble();
     sampling_time_delta = 1.0 / receiverConfig->getParam("FREQUENCY").toDouble();
     mu = 0;

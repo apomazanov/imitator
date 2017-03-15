@@ -20,6 +20,8 @@ public:
 
 private:
     QFile *datafile;
+    int frame_size;
+    QString header_string;
 };
 
 #endif // WRITERFILE_H
