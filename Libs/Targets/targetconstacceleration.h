@@ -1,9 +1,9 @@
 #ifndef TARGETCONSTACCELERATION_H
 #define TARGETCONSTACCELERATION_H
 
-#include "basetarget.h"
+#include "targetbase.h"
 
-class TargetConstAcceleration : public BaseTarget
+class TargetConstAcceleration : public TargetBase
 {
 public:
     explicit TargetConstAcceleration(QMap<QString, QString> *targetConfig);

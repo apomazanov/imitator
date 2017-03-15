@@ -4,7 +4,7 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    ParamsRaw p(0, "./../../../config.json");
+    ParamsRaw p();
 
 //    QString res = p.getParam("TARGETS", 1, "rsc_sigma");
 //    cout << res.toStdString() << endl;

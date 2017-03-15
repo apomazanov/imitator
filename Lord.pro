@@ -12,13 +12,17 @@ TEMPLATE = app
 SOURCES += main.cpp \
     lord.cpp \
     Libs/Locator/locator.cpp \
-    Libs/Targets/basetarget.cpp \
+    Libs/Receivers/receiverbase.cpp \
+    Libs/Receivers/receiverradio.cpp \
+    Libs/Targets/targetbase.cpp \
     Libs/Targets/targetconstacceleration.cpp \
     Libs/Targets/targetconstspeed.cpp \
     Libs/TcpServer/server.cpp \
     Libs/TcpServer/tcpclient.cpp \
     Libs/Utils/config_handler/jsonparser.cpp \
-    Libs/Utils/config_handler/paramsraw.cpp
+    Libs/Utils/config_handler/paramsraw.cpp \
+    Libs/Time/time.cpp \
+    Libs/Writers/writerfile.cpp
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -34,11 +38,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 HEADERS += \
     lord.h \
     Libs/Locator/locator.h \
-    Libs/Targets/basetarget.h \
+    Libs/Receivers/receiverbase.h \
+    Libs/Receivers/receiverradio.h \
+    Libs/Receivers/receivers.h \
+    Libs/Targets/targetbase.h \
     Libs/Targets/targetconstacceleration.h \
     Libs/Targets/targetconstspeed.h \
     Libs/TcpServer/server.h \
     Libs/TcpServer/tcpclient.h \
     Libs/Utils/config_handler/jsonparser.h \
     Libs/Utils/config_handler/paramsraw.h \
-    Libs/Targets/targets.h
+    Libs/Targets/targets.h \
+    Libs/Time/time.h \
+    Libs/Writers/writerfile.h \
+    Libs/Writers/writers.h

@@ -18,8 +18,8 @@ public:
     QMap<QString, QString> getItemFromArray(QString kitName, int pos);
     // Для простых параметров
     QString getParam(QString paramName);
-
     bool ifContainsSimple(QString name);
+    QMap<QString, QString> getAllSimpleParams();
 
 private:
     JsonParser *parser;

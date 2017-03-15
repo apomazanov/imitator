@@ -1,7 +1,7 @@
 #ifndef TARGETS_H
 #define TARGETS_H
 
-#include "basetarget.h"
+#include "targetbase.h"
 #include "targetconstacceleration.h"
 #include "targetconstspeed.h"
 

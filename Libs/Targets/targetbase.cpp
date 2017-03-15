@@ -1,6 +1,6 @@
-#include "basetarget.h"
+#include "targetbase.h"
 
-BaseTarget::BaseTarget(QMap<QString, QString> *targetConfig)
+TargetBase::TargetBase(QMap<QString, QString> *targetConfig)
 {
 //    cout << "base" << endl;
 
@@ -13,10 +13,6 @@ BaseTarget::BaseTarget(QMap<QString, QString> *targetConfig)
     speed_for_coord["Vz"] = targetConfig->value("Vz").toDouble();
 
     sph_coord = translate_to_sph(cart_coord);
-
-//    time_delta = targetConfig->value("world_time_delta").toDouble();
-//    time_delta = 456;
-    time_delta_sq = qPow(time_delta, 2);
 
     if (targetConfig->keys().contains("gain_range") && targetConfig->keys().contains("gain_value"))
     {
@@ -33,7 +29,7 @@ BaseTarget::BaseTarget(QMap<QString, QString> *targetConfig)
     }
 }
 
-QMap<QString, double> BaseTarget::translate_to_sph(QMap<QString, double> dec)
+QMap<QString, double> TargetBase::translate_to_sph(QMap<QString, double> dec)
 {
     QMap<QString, double> temp;
     temp["r"] = qSqrt(qPow(dec.value("x"), 2) +
@@ -44,35 +40,53 @@ QMap<QString, double> BaseTarget::translate_to_sph(QMap<QString, double> dec)
     return temp;
 }
 
-double BaseTarget::getOnRangeGain(double on_range, double on_range_gain)
+double TargetBase::getOnRangeGain(double on_range, double on_range_gain)
 {
     // Амплитуда равна Аопрн * (Rопрн / R) ** 2
     return on_range_gain * (qPow(on_range / getDistance(), 2));
 }
 
-double BaseTarget::getStaticGain()
+double TargetBase::getStaticGain()
 {
     return 100.0;
 }
 
-double BaseTarget::getDistance()
+double TargetBase::getDistance()
 {
     return sph_coord.value("r");
 }
 
-double BaseTarget::getAzimuth()
+double TargetBase::getAzimuth()
 {
     return sph_coord.value("az");
 }
 
-double BaseTarget::getPlace()
+double TargetBase::getPlace()
 {
     return sph_coord.value("pl");
 }
 
-double BaseTarget::getRadialSpeed()
+double TargetBase::getRadialSpeed()
 {
     return (cart_coord["x"] * speed_for_coord["Vx"] +
             cart_coord["y"] * speed_for_coord["Vy"] +
             cart_coord["z"] * speed_for_coord["Vz"]) / sph_coord["r"];
+}
+
+double TargetBase::getGain()
+{
+    return get_gain;
+}
+
+double TargetBase::getRsc()
+{
+    // Рэлей
+    qsrand(QDateTime::currentMSecsSinceEpoch());
+    double x = qrand() % 1;
+    return rsc_sigma * qSqrt(-2.0 * qLn(x));
+}
+
+void TargetBase::timeDeltaSq()
+{
+    time_delta_sq = qPow(time_delta, 2);
 }

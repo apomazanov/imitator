@@ -1,6 +1,6 @@
 #include "targetconstacceleration.h"
 
-TargetConstAcceleration::TargetConstAcceleration(QMap<QString, QString> *targetConfig) : BaseTarget(targetConfig)
+TargetConstAcceleration::TargetConstAcceleration(QMap<QString, QString> *targetConfig) : TargetBase(targetConfig)
 {
 //    cout << "acceleration" << endl;
     acceleration_sigma = targetConfig->value("acceleration_sigma").toDouble();

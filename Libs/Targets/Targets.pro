@@ -10,14 +10,14 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    basetarget.cpp \
     targetconstacceleration.cpp \
     targetconstspeed.cpp \
-    ../Utils/distributions/distributions.cpp
+    ../Utils/distributions/distributions.cpp \
+    targetbase.cpp
 
 HEADERS += \
-    basetarget.h \
     targetconstacceleration.h \
     targetconstspeed.h \
     ../Utils/distributions/distributions.h \
-    targets.h
+    targets.h \
+    targetbase.h

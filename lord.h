@@ -4,6 +4,8 @@
 #include <QObject>
 #include "Libs/Locator/locator.h"
 #include "Libs/Targets/targets.h"
+#include "Libs/Receivers/receivers.h"
+#include "Libs/Writers/writers.h"
 
 class Lord : public QObject
 {
@@ -11,9 +13,13 @@ class Lord : public QObject
 public:
     explicit Lord();
 
+    void run();
+
 private:
     Locator *_locator;
-    // Receiver *_receiver;
+    // Receiver только Radio
+    ReceiverRadio *_receiver;
+    WriterFile *_writer;
 
     // Поддерживаются только цели с постоянной скоростью !!!
     QList<TargetConstSpeed*> *_targets;
@@ -32,7 +38,7 @@ private:
     // Период моделирования мира
     double world_time_delta;
     // Глобальное время
-    double world_time;
+    Time* world_time;
 };
 
 #endif // LORD_H

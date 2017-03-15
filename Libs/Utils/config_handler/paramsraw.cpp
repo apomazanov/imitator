@@ -82,3 +82,8 @@ bool ParamsRaw::ifContainsSimple(QString name)
     else
         return false;
 }
+
+QMap<QString, QString> ParamsRaw::getAllSimpleParams()
+{
+    return parser->paramsSimple;
+}
