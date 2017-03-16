@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QDateTime>
 #include <iostream>
+#include <complex>
 
 using namespace std;
 
@@ -16,6 +17,9 @@ class Server : public QObject
 
 public:
     explicit Server(QObject *parent = 0, int port = 4242);
+    ~Server();
+
+    void broadcast(complex<double> *data, int data_size);
 
 private:
     QTcpServer *tcpServer;

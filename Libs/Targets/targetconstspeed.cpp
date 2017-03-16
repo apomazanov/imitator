@@ -9,5 +9,7 @@ TargetConstSpeed::TargetConstSpeed(QMap<QString, QString> *targetConfig) : Targe
 
 void TargetConstSpeed::update()
 {
+    // Передвигаем цель в соответствии с моделью движения
+
 
 }
